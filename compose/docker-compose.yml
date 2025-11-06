@@ -2,19 +2,43 @@ services:
   starter:
     image: alpine:3.20.3
     depends_on:
-      keycloak:
-        condition: service_healthy
+      keycloak-init:
+        condition: service_completed_successfully
     entrypoint:
       - /bin/sh
       - -c
       - |
         cat <<'MSG'
-        Keycloak is healthy and ready.
+        Keycloak is healthy and initialized.
         Admin Console: http://localhost:8080/admin
         Credentials: admin / admin
-        Realm import: compose/realm-export.json (research realm)
-        Remember to run `docker compose -f compose/docker-compose.yml down` when finished.
+        Realm: research (imported from compose/realm-export.json)
+        OTP provider: dummy (check keycloak logs for codes)
+        Stop with: docker compose -f compose/docker-compose.yml down
         MSG
+
+  keycloak-init:
+    image: coopersoft/keycloak:21.0.2_phone-2.3.3
+    depends_on:
+      keycloak:
+        condition: service_healthy
+    environment:
+      SERVER_URL: http://keycloak:8080
+      MASTER_REALM: master
+      ADMIN_USER: admin
+      ADMIN_PASS: admin
+      REALM: research
+      FLOW_ALIAS: browserPhoneOnly
+      SUBFLOW_ALIAS: browserPhoneOnlyForms
+      ADD_COOKIE: "true"
+    volumes:
+      - ./kc-init.sh:/init/kc-init.sh:ro
+    entrypoint:
+      - /bin/bash
+      - -c
+      - |
+        set -euo pipefail
+        bash /init/kc-init.sh
 
   keycloak:
     image: coopersoft/keycloak:21.0.2_phone-2.3.3
