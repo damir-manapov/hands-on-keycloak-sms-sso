@@ -1,0 +1,45 @@
+{
+  "name": "hands-on-keycloak-migration-from-external-auth",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts",
+    "test": "vitest",
+    "test:e2e": "vitest run",
+    "lint": "eslint src tests --ext .ts",
+    "lint:fix": "yarn lint --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --project tsconfig.typecheck.json",
+    "load:users": "tsx src/commands/loadUsers.ts",
+    "list:users": "tsx src/commands/listKeycloakUsers.ts",
+    "check": "./check.sh",
+    "compose:up": "docker compose -f compose/docker-compose.yml up -d starter",
+    "compose:down": "docker compose -f compose/docker-compose.yml down",
+    "compose:logs": "docker compose -f compose/docker-compose.yml logs -f",
+    "compose:reset": "docker compose -f compose/docker-compose.yml down -v --remove-orphans",
+    "compose:restart": "yarn compose:down && yarn compose:up"
+  },
+  "dependencies": {
+    "axios": "^1.13.1",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.9.2",
+    "@typescript-eslint/eslint-plugin": "^8.46.2",
+    "@typescript-eslint/parser": "^8.46.2",
+    "eslint": "^9.39.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-vitest": "^0.5.4",
+    "prettier": "^3.6.2",
+    "supertest": "^7.1.4",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.2",
+    "tsx": "^4.19.2",
+    "vitest": "^4.0.6"
+  }
+}

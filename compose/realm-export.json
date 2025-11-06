@@ -1,0 +1,24 @@
+{
+  "realm": "research",
+  "enabled": true,
+  "displayName": "Keycloak Research Realm",
+  "users": [
+    {
+      "username": "test-user",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "test-user@example.com",
+      "firstName": "Test",
+      "lastName": "User",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password",
+          "temporary": false
+        }
+      ],
+      "requiredActions": [],
+      "realmRoles": ["offline_access", "default-roles-research", "uma_authorization"]
+    }
+  ]
+}
