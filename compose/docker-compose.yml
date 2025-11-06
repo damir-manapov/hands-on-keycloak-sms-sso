@@ -17,13 +17,7 @@ services:
         MSG
 
   keycloak:
-    build:
-      context: .
-      dockerfile: keycloak-phone.Dockerfile
-      args:
-        KEYCLOAK_VERSION: "21.0.2"
-        PROVIDER_VERSION: "21.0.2_phone-2.3.3"
-    image: keycloak-phone-provider:21.0.2
+    image: coopersoft/keycloak:21.0.2_phone-2.3.3
     command: start-dev --import-realm --spi-phone-default-service=dummy
     ports:
       - "8080:8080"
@@ -31,6 +25,9 @@ services:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
       KC_HEALTH_ENABLED: "true"
+      KC_SMS_PROVIDER: "dummy"
+      KC_SMS_FROM: "dummy"
+      KC_SPI_PHONE_CHARGE_ENABLED: "false"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
