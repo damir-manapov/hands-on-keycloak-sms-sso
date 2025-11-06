@@ -28,9 +28,11 @@ services:
       ADMIN_USER: admin
       ADMIN_PASS: admin
       REALM: research
-      FLOW_ALIAS: browserPhoneOnly
-      SUBFLOW_ALIAS: browserPhoneOnlyForms
+      BROWSER_FLOW_ALIAS: browserPhoneOnly
+      BROWSER_SUBFLOW_ALIAS: browserPhoneOnlyForms
+      REG_FLOW_ALIAS: registrationPhoneOnly
       ADD_COOKIE: "true"
+      CREATE_TEST_CLIENT: "true"
     volumes:
       - ./kc-init.sh:/init/kc-init.sh:ro
     entrypoint:
