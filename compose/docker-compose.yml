@@ -7,7 +7,14 @@ services:
     entrypoint:
       - /bin/sh
       - -c
-      - echo "Keycloak is healthy and ready for migration tests."
+      - |
+        cat <<'MSG'
+        Keycloak is healthy and ready.
+        Admin Console: http://localhost:8080/admin
+        Credentials: admin / admin
+        Realm import: compose/realm-export.json (research realm)
+        Remember to run `docker compose -f compose/docker-compose.yml down` when finished.
+        MSG
 
   keycloak:
     build:

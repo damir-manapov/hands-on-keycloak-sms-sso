@@ -17,7 +17,7 @@
     "load:users": "tsx src/commands/loadUsers.ts",
     "list:users": "tsx src/commands/listKeycloakUsers.ts",
     "check": "./check.sh",
-    "compose:up": "docker compose -f compose/docker-compose.yml up -d starter",
+    "compose:up": "docker compose -f compose/docker-compose.yml up starter",
     "compose:down": "docker compose -f compose/docker-compose.yml down",
     "compose:logs": "docker compose -f compose/docker-compose.yml logs -f",
     "compose:reset": "docker compose -f compose/docker-compose.yml down -v --remove-orphans",
